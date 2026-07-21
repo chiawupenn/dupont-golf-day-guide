@@ -90,37 +90,39 @@ export default function Home() {
     <main>
       <header className="site-header">
         <a className="wordmark" href="#top" aria-label="DuPont golf day, back to top">
-          <span className="wordmark-mark" aria-hidden="true">D</span>
           <span>DuPont Golf Day</span>
         </a>
         <nav className="header-nav" aria-label="Page sections">
-          <a href="#route">Arrival plan</a>
-          <a href="#tees">Tee distances</a>
+          <a href="#route"><span>01</span> Arrival plan</a>
+          <a href="#tees"><span>02</span> Tee distances</a>
         </nav>
       </header>
 
       <section className="hero" id="top">
-        <div className="hero-copy">
-          <p className="eyebrow">Our round at DuPont Country Club</p>
-          <h1>
-            Tee time,
-            <br />
-            <em>without the scramble.</em>
-          </h1>
-          <p className="hero-intro">
-            A quick three-stop plan for an easy warm-up and an on-time start.
-            Save this page for the drive.
-          </p>
+        <div className="club-intro">
+          <img
+            className="club-logo"
+            src="/dupont-country-club-logo.jpg"
+            alt="DuPont Country Club logo"
+            width="117"
+            height="116"
+          />
+          <div>
+            <p className="eyebrow">Our round at</p>
+            <h1>DuPont Country Club</h1>
+            <p className="hero-intro">
+              Warm up, re-park, and meet at the starters shed—without the scramble.
+            </p>
+          </div>
         </div>
 
-        <aside className="hero-card" aria-label="Important arrival reminder">
-          <div className="hero-card-top">
-            <span>Meet at</span>
-            <span className="golf-ball" aria-hidden="true" />
-          </div>
+        <aside className="hero-card" aria-label="Arrive at the starters shed 10 minutes before tee time">
           <strong>10</strong>
-          <p>minutes before our tee time</p>
-          <div className="hero-card-bottom">at the starters shed</div>
+          <div>
+            <span>Arrive early</span>
+            <p>Minutes before tee time</p>
+            <small>Meet at the starters shed</small>
+          </div>
         </aside>
       </section>
 
