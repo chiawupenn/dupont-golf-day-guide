@@ -1,6 +1,45 @@
 const rangeLot = "https://maps.app.goo.gl/BMGBEW9VfpXXGxVp7";
 const starterLot = "https://maps.app.goo.gl/qXsCyQuoFHJtH1ZU9";
 
+const courses = [
+  {
+    name: "DuPont Course",
+    par: "Par 71",
+    description: "Championship layout",
+    featured: true,
+    tees: [
+      { name: "Black", yards: "7,120", color: "black" },
+      { name: "Blue", yards: "6,763", color: "blue" },
+      { name: "Gold", yards: "6,325", color: "gold" },
+      { name: "Combo", yards: "5,996", color: "combo" },
+      { name: "White", yards: "5,812", color: "white" },
+      { name: "Green", yards: "5,255", color: "green" },
+    ],
+  },
+  {
+    name: "Nemours Course",
+    par: "Par 71",
+    description: "Classic parkland course",
+    featured: false,
+    tees: [
+      { name: "Blue", yards: "6,230", color: "blue" },
+      { name: "White", yards: "6,000", color: "white" },
+      { name: "Red", yards: "5,545", color: "red" },
+    ],
+  },
+  {
+    name: "Montchanin Course",
+    par: "Par 61",
+    description: "Executive course",
+    featured: false,
+    tees: [
+      { name: "Blue", yards: "4,283", color: "blue" },
+      { name: "White", yards: "4,166", color: "white" },
+      { name: "Red", yards: "3,965", color: "red" },
+    ],
+  },
+];
+
 function MapLink({ href, children }: { href: string; children: React.ReactNode }) {
   return (
     <a className="map-link" href={href} target="_blank" rel="noreferrer">
@@ -20,7 +59,10 @@ export default function Home() {
           <span className="wordmark-mark" aria-hidden="true">D</span>
           <span>DuPont Golf Day</span>
         </a>
-        <span className="header-note">Friends’ arrival guide</span>
+        <nav className="header-nav" aria-label="Page sections">
+          <a href="#route">Arrival plan</a>
+          <a href="#tees">Tee distances</a>
+        </nav>
       </header>
 
       <section className="hero" id="top">
@@ -48,7 +90,7 @@ export default function Home() {
         </aside>
       </section>
 
-      <section className="route-section" aria-labelledby="route-heading">
+      <section className="route-section" id="route" aria-labelledby="route-heading">
         <div className="section-heading">
           <p className="eyebrow">The game plan</p>
           <h2 id="route-heading">Three simple stops.</h2>
@@ -119,6 +161,50 @@ export default function Home() {
             </div>
           </article>
         </div>
+      </section>
+
+      <section className="tees-section" id="tees" aria-labelledby="tees-heading">
+        <div className="tees-intro">
+          <p className="eyebrow">Know your distance</p>
+          <h2 id="tees-heading">Pick a tee that fits the day.</h2>
+          <p>
+            DuPont Country Club has three courses. Match the course name on our
+            tee time, then choose by total distance—not just tee color.
+          </p>
+          <div className="yards-key"><span>YD</span> All distances shown in yards</div>
+        </div>
+
+        <div className="course-grid">
+          {courses.map((course) => (
+            <article
+              className={`course-card${course.featured ? " course-card-featured" : ""}`}
+              key={course.name}
+            >
+              <div className="course-card-header">
+                <div>
+                  <p>{course.description}</p>
+                  <h3>{course.name}</h3>
+                </div>
+                <span>{course.par}</span>
+              </div>
+              <ul className="tee-list" aria-label={`${course.name} tee distances`}>
+                {course.tees.map((tee) => (
+                  <li key={tee.name}>
+                    <span className={`tee-dot tee-${tee.color}`} aria-hidden="true" />
+                    <span className="tee-name">{tee.name}</span>
+                    <strong>{tee.yards}</strong>
+                    <span className="yard-label">yd</span>
+                  </li>
+                ))}
+              </ul>
+            </article>
+          ))}
+        </div>
+
+        <p className="tee-note">
+          Scorecard yardages can vary with daily setup. Confirm the course and
+          tees with the golf shop or starter before the round.
+        </p>
       </section>
 
       <section className="quick-check" aria-labelledby="check-heading">
