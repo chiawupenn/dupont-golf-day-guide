@@ -89,8 +89,8 @@ export default function Home() {
   return (
     <main>
       <header className="site-header">
-        <a className="wordmark" href="#top" aria-label="DuPont golf day, back to top">
-          <span>DuPont Golf Day</span>
+        <a className="wordmark" href="#top" aria-label="Game day plan at Dupont Country Club, back to top">
+          <span>Game day Plan at Dupont Country Club</span>
         </a>
         <nav className="header-nav" aria-label="Page sections">
           <a href="#route"><span>01</span> Arrival plan</a>
