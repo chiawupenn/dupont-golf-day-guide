@@ -113,11 +113,12 @@ main {
 
 .club-logo {
   width: clamp(84px, 9vw, 110px);
-  height: auto;
+  aspect-ratio: 117 / 116;
   flex: 0 0 auto;
   display: block;
-  border-radius: 3px;
-  box-shadow: 0 10px 26px rgba(0, 46, 92, 0.16);
+  background: var(--green);
+  -webkit-mask: url("/dupont-country-club-logo-transparent.png") center / contain no-repeat;
+  mask: url("/dupont-country-club-logo-transparent.png") center / contain no-repeat;
 }
 
 .eyebrow {

@@ -100,12 +100,10 @@ export default function Home() {
 
       <section className="hero" id="top">
         <div className="club-intro">
-          <img
+          <span
             className="club-logo"
-            src="/dupont-country-club-logo.jpg"
-            alt="DuPont Country Club logo"
-            width="117"
-            height="116"
+            role="img"
+            aria-label="DuPont Country Club logo"
           />
           <div>
             <p className="eyebrow">Our round at</p>
