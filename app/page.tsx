@@ -195,19 +195,25 @@ export default function Home() {
 
           <article className="route-card route-card-arrive">
             <div className="route-number" aria-hidden="true">03</div>
-            <div className="route-content">
-              <div className="route-meta">
-                <span className="route-tag">Final stop</span>
-                <span>Ready to play</span>
+            <div className="route-content arrival-layout">
+              <div className="arrival-copy">
+                <div className="route-meta">
+                  <span className="route-tag">Final stop</span>
+                  <span>Ready to play</span>
+                </div>
+                <h3>Starters shed</h3>
+                <p>
+                  Please be at the starters shed at least <strong>10 minutes before</strong>
+                  {" "}our tee time.
+                </p>
+                <div className="arrival-pill">
+                  <span className="pulse-dot" aria-hidden="true" />
+                  Meet here 10 minutes early
+                </div>
               </div>
-              <h3>Starters shed</h3>
-              <p>
-                Please be at the starters shed at least <strong>10 minutes before</strong>
-                {" "}our tee time.
-              </p>
-              <div className="arrival-pill">
-                <span className="pulse-dot" aria-hidden="true" />
-                Meet here 10 minutes early
+              <div className="arrival-countdown" aria-label="10 minutes early">
+                <strong>10</strong>
+                <span>MIN</span>
               </div>
             </div>
           </article>
