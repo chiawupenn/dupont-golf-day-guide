@@ -51,6 +51,40 @@ function MapLink({ href, children }: { href: string; children: React.ReactNode }
   );
 }
 
+function MapPreview({
+  href,
+  src,
+  alt,
+  title,
+}: {
+  href: string;
+  src: string;
+  alt: string;
+  title: string;
+}) {
+  return (
+    <a
+      className="map-preview"
+      href={href}
+      target="_blank"
+      rel="noreferrer"
+      aria-label={`${title}: open in Google Maps`}
+    >
+      <span className="map-preview-image">
+        <img src={src} alt={alt} width="1400" height="1050" loading="lazy" />
+        <span className="map-pin-label">Park here</span>
+      </span>
+      <span className="map-preview-caption">
+        <span>
+          <strong>{title}</strong>
+          <small>Satellite preview · Google Maps</small>
+        </span>
+        <span className="preview-arrow" aria-hidden="true">↗</span>
+      </span>
+    </a>
+  );
+}
+
 export default function Home() {
   return (
     <main>
@@ -100,17 +134,25 @@ export default function Home() {
         <div className="route-list">
           <article className="route-card route-card-range">
             <div className="route-number" aria-hidden="true">01</div>
-            <div className="route-content">
-              <div className="route-meta">
-                <span className="route-tag">First stop</span>
-                <span>Warm up</span>
+            <div className="route-content has-map">
+              <div className="route-copy">
+                <div className="route-meta">
+                  <span className="route-tag">First stop</span>
+                  <span>Warm up</span>
+                </div>
+                <h3>Driving range lot</h3>
+                <p>
+                  Start here. Enter from Black Gates Road, park beside the
+                  practice building, and get loose before the round.
+                </p>
+                <MapLink href={rangeLot}>Open driving range lot</MapLink>
               </div>
-              <h3>Driving range lot</h3>
-              <p>
-                Start here. Park at the driving range and get loose before the
-                round.
-              </p>
-              <MapLink href={rangeLot}>Open driving range lot</MapLink>
+              <MapPreview
+                href={rangeLot}
+                src="/driving-range-parking-map.jpg"
+                alt="Satellite map of the DuPont Country Club driving range building and parking lot beside Black Gates Road, marked with a red pin"
+                title="Driving range parking"
+              />
             </div>
           </article>
 
@@ -122,17 +164,26 @@ export default function Home() {
 
           <article className="route-card route-card-starter">
             <div className="route-number" aria-hidden="true">02</div>
-            <div className="route-content">
-              <div className="route-meta">
-                <span className="route-tag">Re-park</span>
-                <span>Closer to the starters shed</span>
+            <div className="route-content has-map">
+              <div className="route-copy">
+                <div className="route-meta">
+                  <span className="route-tag">Re-park</span>
+                  <span>Closer to the starters shed</span>
+                </div>
+                <h3>Clubhouse lot</h3>
+                <p>
+                  After warming up, move your car to this marked area in the
+                  clubhouse lot. It puts you closer to the first tee and the
+                  starters shed.
+                </p>
+                <MapLink href={starterLot}>Open clubhouse lot</MapLink>
               </div>
-              <h3>Starter-side lot</h3>
-              <p>
-                Move your car here after the range. This lot puts you closer to
-                the starters shed for an easier start.
-              </p>
-              <MapLink href={starterLot}>Open starter-side lot</MapLink>
+              <MapPreview
+                href={starterLot}
+                src="/clubhouse-parking-map.jpg"
+                alt="Satellite map of the DuPont Country Club clubhouse parking lot near Rockland Road and the first tee, marked with a red pin"
+                title="Clubhouse parking"
+              />
             </div>
           </article>
 
