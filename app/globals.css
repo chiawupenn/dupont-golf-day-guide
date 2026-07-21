@@ -325,8 +325,8 @@ main {
 
 .route-tag {
   padding: 8px 11px;
-  color: var(--ink);
-  background: var(--lime);
+  color: white;
+  background: var(--green);
   border-radius: 999px;
 }
 
@@ -351,6 +351,27 @@ main {
 .route-content > p strong,
 .route-copy > p strong {
   color: var(--orange);
+}
+
+.route-content h3.route-title-nowrap {
+  font-size: clamp(30px, 3vw, 40px);
+  text-wrap: nowrap;
+  white-space: nowrap;
+}
+
+.route-copy > .guest-reminder {
+  margin-top: 22px;
+  padding: 14px 16px;
+  color: var(--green-deep);
+  background: white;
+  border-left: 4px solid var(--green);
+  border-radius: 2px;
+  font-size: 13px;
+  line-height: 1.55;
+}
+
+.route-copy > .guest-reminder strong {
+  color: var(--green-deep);
 }
 
 .map-link {
@@ -515,6 +536,7 @@ footer a:focus-visible {
 
 .route-card-arrive .route-tag {
   color: var(--green-deep);
+  background: white;
 }
 
 .arrival-layout {

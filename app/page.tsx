@@ -140,10 +140,15 @@ export default function Home() {
                   <span className="route-tag">First stop</span>
                   <span>Warm up</span>
                 </div>
-                <h3>Driving range lot</h3>
+                <h3 className="route-title-nowrap">Driving range lot</h3>
                 <p>
                   Start here. Enter from Black Gates Road, park beside the
                   practice building, and get loose before the round.
+                </p>
+                <p className="guest-reminder">
+                  <strong>Guest reminder:</strong> If any club employee asks for
+                  membership information, please say you are guests of Jericho Wu
+                  and give them our tee time for the day.
                 </p>
                 <MapLink href={rangeLot}>Open driving range lot</MapLink>
               </div>
