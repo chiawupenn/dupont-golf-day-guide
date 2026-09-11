@@ -76,11 +76,13 @@ function MapPreview({
   src,
   alt,
   title,
+  preserveAspect = false,
 }: {
   href: string;
   src: string;
   alt: string;
   title: string;
+  preserveAspect?: boolean;
 }) {
   return (
     <a
@@ -90,8 +92,18 @@ function MapPreview({
       rel="noreferrer"
       aria-label={`${title}: open in Google Maps`}
     >
-      <span className="map-preview-image">
-        <img src={src} alt={alt} width="1400" height="1050" loading="lazy" />
+      <span
+        className="map-preview-image"
+        style={preserveAspect ? { aspectRatio: "auto" } : undefined}
+      >
+        <img
+          src={src}
+          alt={alt}
+          width="1400"
+          height="1050"
+          loading="lazy"
+          style={preserveAspect ? { height: "auto", objectFit: "contain" } : undefined}
+        />
         <span className="map-pin-label">Park here</span>
       </span>
       <span className="map-preview-caption">
@@ -198,39 +210,108 @@ export default function Guide({
 
           <article className="route-card route-card-starter" id="clubhouse">
             <div className="route-number" aria-hidden="true">02</div>
-            <div className="route-content clubhouse-content">
-              <div className="course-picker">
+            <div className="route-content clubhouse-content" style={{ gap: "30px" }}>
+              <div
+                className="course-picker"
+                style={{ borderBottom: "1px solid var(--line)", paddingBottom: "26px" }}
+              >
                 <p className="eyebrow">Choose our course</p>
-                <nav className="course-tabs" aria-label="Clubhouse parking by golf course">
+                <nav
+                  className="course-tabs header-nav"
+                  aria-label="Clubhouse parking by golf course"
+                  style={{
+                    display: "grid",
+                    gridTemplateColumns: "repeat(auto-fit, minmax(min(100%, 240px), 1fr))",
+                    gap: "12px",
+                  }}
+                >
                   {Object.entries(arrivalCourses).map(([id, course]) => (
-                    <a key={id} href={`${basePath}/${id}/#clubhouse`} aria-current={id === courseId ? "page" : undefined}>
+                    <a
+                      key={id}
+                      href={`${basePath}/${id}/#clubhouse`}
+                      aria-current={id === courseId ? "page" : undefined}
+                      style={{
+                        minHeight: "82px",
+                        padding: "16px",
+                        display: "flex",
+                        flexDirection: "column",
+                        alignItems: "flex-start",
+                        justifyContent: "center",
+                        gap: "5px",
+                        color: id === courseId ? "white" : "var(--green-deep)",
+                        background: id === courseId ? "var(--green)" : "white",
+                        border: "2px solid var(--green)",
+                        borderRadius: "5px",
+                        textDecoration: "none",
+                      }}
+                    >
                       <span>DuPont Country Club</span>
                       <strong>{course.name}</strong>
                     </a>
                   ))}
                 </nav>
-                <div className="course-share">
-                  <p>Share this page for our <strong>{selectedCourse.name}</strong> round.</p>
-                  <button type="button" data-copy-course-link={coursePath}>Copy course link</button>
+                <div
+                  className="course-share"
+                  style={{
+                    marginTop: "18px",
+                    display: "flex",
+                    alignItems: "center",
+                    flexWrap: "wrap",
+                    gap: "10px 18px",
+                  }}
+                >
+                  <p style={{ flex: "1 1 240px", margin: 0, fontSize: "14px" }}>
+                    Share this page for our <strong>{selectedCourse.name}</strong> round.
+                  </p>
+                  <button
+                    className="map-link course-copy-button"
+                    type="button"
+                    data-copy-course-link={coursePath}
+                    style={{
+                      width: "auto",
+                      minHeight: "44px",
+                      marginTop: 0,
+                      padding: "10px 18px",
+                      display: "inline-flex",
+                      justifyContent: "center",
+                      color: "white",
+                      background: "var(--green)",
+                      border: 0,
+                      borderRadius: "999px",
+                      fontSize: "14px",
+                      fontWeight: 700,
+                    }}
+                  >
+                    Copy course link
+                  </button>
                   <span className="copy-status" role="status" aria-live="polite" />
                 </div>
               </div>
-              <div className="clubhouse-map-layout">
-              <div className="route-copy">
-                <div className="route-meta">
-                  <span className="route-tag">Re-park</span>
-                  <span>{selectedCourse.name}</span>
+              <div
+                className="clubhouse-map-layout"
+                style={{
+                  display: "grid",
+                  gridTemplateColumns: "repeat(auto-fit, minmax(min(100%, 320px), 1fr))",
+                  alignItems: "center",
+                  gap: "clamp(30px, 4vw, 58px)",
+                }}
+              >
+                <div className="route-copy">
+                  <div className="route-meta">
+                    <span className="route-tag">Re-park</span>
+                    <span>{selectedCourse.name}</span>
+                  </div>
+                  <h3 className="route-title-nowrap">Clubhouse lot</h3>
+                  <p>{selectedCourse.instructions}</p>
+                  <MapLink href={selectedCourse.map}>Open {courseId === "nemours" ? "Nemours" : "Championship"} lot</MapLink>
                 </div>
-                <h3 className="route-title-nowrap">Clubhouse lot</h3>
-                <p>{selectedCourse.instructions}</p>
-                <MapLink href={selectedCourse.map}>Open {courseId === "nemours" ? "Nemours" : "Championship"} lot</MapLink>
-              </div>
-              <MapPreview
-                href={selectedCourse.map}
-                src={`${basePath}${selectedCourse.image}`}
-                alt={selectedCourse.alt}
-                title={`${courseId === "nemours" ? "Nemours" : "Championship"} parking`}
-              />
+                <MapPreview
+                  href={selectedCourse.map}
+                  src={`${basePath}${selectedCourse.image}`}
+                  alt={selectedCourse.alt}
+                  title={`${courseId === "nemours" ? "Nemours" : "Championship"} parking`}
+                  preserveAspect
+                />
               </div>
             </div>
           </article>

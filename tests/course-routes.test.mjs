@@ -12,6 +12,9 @@ function checkGuide(html, course, basePath) {
   assert.ok(html.includes(`Playing</span> ${course.name}`));
   assert.ok(html.includes(`href="${basePath}/${course.id}/#clubhouse" aria-current="page"`));
   assert.ok(html.includes(`data-copy-course-link="${basePath}/${course.id}/"`));
+  assert.ok(html.includes('class="course-tabs header-nav"'));
+  assert.ok(html.includes('class="map-link course-copy-button"'));
+  assert.ok(html.includes('grid-template-columns:repeat(auto-fit, minmax(min(100%, 240px), 1fr))'));
   const parking = html.split('id="clubhouse"')[1].split("</article>")[0];
   assert.ok(parking.includes(`https://maps.app.goo.gl/${course.map}`));
   assert.ok(parking.includes(`src="${basePath}/${course.image}"`));
