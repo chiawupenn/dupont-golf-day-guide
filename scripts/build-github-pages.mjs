@@ -9,8 +9,8 @@ const projectDirectory = resolve(scriptDirectory, "..");
 const outputDirectory = join(projectDirectory, "docs");
 const publicDirectory = join(projectDirectory, "public");
 
-const pageSource = await readFile(join(projectDirectory, "app/page.tsx"), "utf8");
-const transformed = await transformWithEsbuild(pageSource, "app/page.tsx", {
+const pageSource = await readFile(join(projectDirectory, "app/guide.tsx"), "utf8");
+const transformed = await transformWithEsbuild(pageSource, "app/guide.tsx", {
   format: "esm",
   jsx: "automatic",
   loader: "tsx",
@@ -25,33 +25,34 @@ const executablePage = transformed.code.replace(
 const pageModule = await import(
   `data:text/javascript;base64,${Buffer.from(executablePage).toString("base64")}`
 );
-const pageMarkup = renderToStaticMarkup(pageModule.default()).replaceAll(
-  'src="/',
-  'src="./',
-);
-
-const pageUrl = "https://chiawupenn.github.io/dupont-golf-day-guide/";
-const document = `<!doctype html>
+const basePath = "/dupont-golf-day-guide";
+const siteUrl = `https://chiawupenn.github.io${basePath}/`;
+function renderDocument(courseId, route) {
+const courseName = courseId === "nemours" ? "Nemours Course" : "Championship Course";
+const pageUrl = `${siteUrl}${route}`;
+const pageMarkup = renderToStaticMarkup(pageModule.default({ courseId, basePath }));
+return `<!doctype html>
 <html lang="en">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="theme-color" content="#003366" />
-    <title>Game Day Plan at DuPont Country Club</title>
-    <meta name="description" content="Driving range, parking, starters shed directions, and tee distances for our round at DuPont Country Club." />
+    <title>DuPont ${courseName} | Guest Arrival Guide</title>
+    <meta name="description" content="Our ${courseName} round: driving range, course-specific parking, starters shed directions, and tee distances." />
     <link rel="canonical" href="${pageUrl}" />
-    <link rel="icon" href="./favicon.svg" />
-    <link rel="stylesheet" href="./styles.css" />
-    <meta property="og:title" content="Game Day Plan at DuPont Country Club" />
-    <meta property="og:description" content="Range, re-park, choose your tee, and arrive 10 minutes early." />
+    <link rel="icon" href="${basePath}/favicon.svg" />
+    <link rel="stylesheet" href="${basePath}/styles.css" />
+    <meta property="og:title" content="DuPont ${courseName} | Guest Arrival Guide" />
+    <meta property="og:description" content="Our ${courseName} round: warm up, re-park, and arrive 10 minutes early." />
     <meta property="og:type" content="website" />
     <meta property="og:url" content="${pageUrl}" />
-    <meta property="og:image" content="${pageUrl}og.png" />
+    <meta property="og:image" content="${siteUrl}og.png" />
     <meta name="twitter:card" content="summary_large_image" />
   </head>
   <body>${pageMarkup}</body>
 </html>
 `;
+}
 
 const globalStyles = await readFile(join(projectDirectory, "app/globals.css"), "utf8");
 const pageStyles = globalStyles
@@ -60,7 +61,11 @@ const pageStyles = globalStyles
 
 await rm(outputDirectory, { force: true, recursive: true });
 await mkdir(outputDirectory, { recursive: true });
-await writeFile(join(outputDirectory, "index.html"), document);
+await writeFile(join(outputDirectory, "index.html"), renderDocument("championship", ""));
+for (const courseId of ["championship", "nemours"]) {
+  await mkdir(join(outputDirectory, courseId), { recursive: true });
+  await writeFile(join(outputDirectory, courseId, "index.html"), renderDocument(courseId, `${courseId}/`));
+}
 await writeFile(join(outputDirectory, "styles.css"), pageStyles);
 await writeFile(join(outputDirectory, ".nojekyll"), "");
 
