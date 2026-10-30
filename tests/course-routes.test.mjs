@@ -24,6 +24,10 @@ function checkGuide(html, course, basePath) {
   assert.ok(html.includes("BMGBEW9VfpXXGxVp7"));
   assert.ok(html.includes("10 minutes before"));
   assert.ok(html.includes("Jericho Wu"));
+  assert.ok(html.includes("Stop at the golf shop first."));
+  assert.ok(html.includes("Bring a physical credit card."));
+  assert.ok(html.includes("Apple Pay and other mobile payments are not accepted."));
+  assert.ok(html.includes("After paying, proceed to the starters shed"));
 }
 
 for (const course of variants) {

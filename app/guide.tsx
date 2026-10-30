@@ -316,9 +316,28 @@ export default function Guide({
             </div>
           </article>
 
+          <aside className="payment-stop" aria-labelledby="payment-heading">
+            <div className="payment-stop-label">
+              <span>Before the shed</span>
+              <strong>Golf shop</strong>
+            </div>
+            <div className="payment-stop-copy">
+              <p className="eyebrow">Pay green fees</p>
+              <h3 id="payment-heading">Stop at the golf shop first.</h3>
+              <p>
+                After parking, please go to the golf shop (pro shop) to pay the
+                green fees. Once payment is complete, proceed to the starters shed.
+              </p>
+              <div className="payment-warning">
+                <strong>Bring a physical credit card.</strong>
+                <span>Apple Pay and other mobile payments are not accepted.</span>
+              </div>
+            </div>
+          </aside>
+
           <div className="route-connector" aria-hidden="true">
             <span />
-            <p>Grab your clubs and head to the shed</p>
+            <p>After paying, proceed to the starters shed</p>
             <span />
           </div>
 
@@ -401,7 +420,8 @@ export default function Guide({
         <ol>
           <li><span>1</span>Open the range lot</li>
           <li><span>2</span>Re-park for the {selectedCourse.name}</li>
-          <li><span>3</span>Reach the shed 10 minutes early</li>
+          <li><span>3</span>Pay green fees with a physical credit card</li>
+          <li><span>4</span>Reach the shed 10 minutes early</li>
         </ol>
       </section>
 

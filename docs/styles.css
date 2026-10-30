@@ -643,6 +643,85 @@ footer a:focus-visible {
   background: white;
 }
 
+.payment-stop {
+  display: grid;
+  grid-template-columns: minmax(180px, 0.46fr) minmax(0, 1.54fr);
+  color: var(--green-deep);
+  background: #f3f2f0;
+  border: 1px solid var(--line);
+  border-radius: 3px;
+  overflow: hidden;
+}
+
+.payment-stop-label {
+  min-height: 250px;
+  padding: 30px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 8px;
+  color: white;
+  background: var(--green);
+}
+
+.payment-stop-label span {
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.payment-stop-label strong {
+  font-family: "Abhaya Libre", Georgia, "Times New Roman", serif;
+  font-size: clamp(38px, 4vw, 56px);
+  font-weight: 500;
+  line-height: 0.95;
+}
+
+.payment-stop-copy {
+  padding: clamp(30px, 5vw, 58px);
+}
+
+.payment-stop-copy .eyebrow {
+  margin-bottom: 14px;
+}
+
+.payment-stop-copy h3 {
+  margin: 0 0 14px;
+  font-family: "Abhaya Libre", Georgia, "Times New Roman", serif;
+  font-size: clamp(34px, 4vw, 52px);
+  font-weight: 500;
+  line-height: 1;
+  letter-spacing: -0.03em;
+}
+
+.payment-stop-copy > p:not(.eyebrow) {
+  max-width: 760px;
+  margin: 0;
+  color: var(--ink-soft);
+  font-size: 16px;
+  line-height: 1.65;
+}
+
+.payment-warning {
+  width: fit-content;
+  margin-top: 24px;
+  padding: 15px 18px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px 10px;
+  color: var(--green-deep);
+  background: white;
+  border-left: 4px solid var(--orange);
+  border-radius: 2px;
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+.payment-warning strong {
+  font-weight: 800;
+}
+
 .arrival-layout {
   padding: 0;
   display: grid;
@@ -990,6 +1069,19 @@ footer a {
 }
 
 @media (max-width: 820px) {
+  .payment-stop {
+    grid-template-columns: 1fr;
+  }
+
+  .payment-stop-label {
+    min-height: 0;
+    padding: 24px 22px;
+  }
+
+  .payment-stop-copy {
+    padding: 30px 22px 34px;
+  }
+
   .clubhouse-map-layout { grid-template-columns: 1fr; gap: 28px; }
   .course-tabs a strong { font-size: 14px; }
   .course-tabs { grid-template-columns: 1fr; }
@@ -1169,6 +1261,16 @@ footer a {
 }
 
 @media (max-width: 520px) {
+  .payment-stop-label,
+  .payment-stop-copy {
+    padding-right: 18px;
+    padding-left: 18px;
+  }
+
+  .payment-warning {
+    width: 100%;
+  }
+
   .selected-course { font-size: 12px; }
   .wordmark {
     font-size: 11.5px;
